@@ -15,6 +15,11 @@ type SampleSink interface {
 	Consume(data []interface{})
 }
 
+type NullSink struct {
+}
+
+func (n *NullSink) Consume() {}
+
 type Outputter struct {
 	bufPtr          int
 	clocksPerSample float
@@ -23,7 +28,7 @@ type Outputter struct {
 	timeErr         float
 }
 
-func initOutputter(float rate) *Outputter {
+func newOutputter(float rate) *Outputter {
 	return &Outputter{
 		timeErr:         0,
 		bufPtr:          0,
